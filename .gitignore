@@ -1,0 +1,10 @@
+node_modules
+dist
+dev-dist
+.cache
+.venv-mt
+*.log
+.DS_Store
+
+# configuración local del entorno de Claude Code
+.claude/

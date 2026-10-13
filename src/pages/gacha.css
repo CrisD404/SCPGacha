@@ -1,0 +1,341 @@
+.gacha-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.pack-zone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding-top: 4px;
+}
+
+.stamina {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 22px;
+  border-radius: 999px;
+  border: 2px solid var(--hazard);
+  background: #0a0b0d;
+  box-shadow: 0 0 22px rgba(245, 197, 24, 0.25), inset 0 0 12px rgba(245, 197, 24, 0.12);
+}
+
+.stamina.empty {
+  border-color: var(--line-2);
+  box-shadow: none;
+}
+
+.stamina-label {
+  font-size: 13px;
+  letter-spacing: 0.22em;
+  color: var(--hazard);
+}
+
+.stamina.empty .stamina-label {
+  color: var(--text-faint);
+}
+
+.stamina-value {
+  font-size: 28px;
+  line-height: 1;
+}
+
+.stamina-value i {
+  font-style: normal;
+  color: var(--hazard);
+  padding: 0 2px;
+}
+
+@media (max-width: 560px) {
+  .stamina {
+    padding: 6px 14px;
+    gap: 8px;
+  }
+  .stamina-label {
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+  }
+  .stamina-value {
+    font-size: 22px;
+  }
+}
+
+.stamina-sub {
+  font-size: 12px;
+  color: var(--text-dim);
+}
+
+.pack-picker {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.chip-thaumiel:not(.on) {
+  border-color: rgba(255, 140, 240, 0.5);
+  color: #ffb6f4;
+}
+
+.chip-o5:not(.on) {
+  border-color: rgba(255, 200, 69, 0.6);
+  color: #ffd77a;
+}
+
+.chip-thaumiel.on {
+  background: linear-gradient(90deg, #ff8cf0, #ffc845, #5fe0ff);
+  border-color: transparent;
+}
+
+.chip-o5.on {
+  background: linear-gradient(180deg, #ffe18a, #c99a1e);
+  border-color: #ffd77a;
+}
+
+.pack-guarantee {
+  min-height: 20px;
+  font-size: 13px;
+  font-weight: 650;
+  color: #c9a6ff;
+  text-align: center;
+}
+
+.pg-thaumiel {
+  background: linear-gradient(90deg, #ff8cf0, #ffc845, #5fe0ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.pg-o5 {
+  color: #ffd77a;
+}
+
+.pg-pity {
+  color: #e0c8ff;
+  text-shadow: 0 0 12px rgba(181, 123, 255, 0.7);
+}
+
+.pack-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding: 18px 0 4px;
+  /* el halo gira y sus esquinas (transparentes) ensanchaban la página en móvil */
+  overflow-x: clip;
+}
+
+.pack-aura {
+  position: absolute;
+  width: 140%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 59, 78, 0.18), transparent 62%);
+  animation: aura 4s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+.aura-pity {
+  background: radial-gradient(circle, rgba(181, 123, 255, 0.28), transparent 62%);
+}
+
+.aura-thaumiel {
+  background: conic-gradient(from 0deg, rgba(255, 140, 240, 0.3), rgba(255, 200, 69, 0.3), rgba(95, 224, 255, 0.3), rgba(181, 123, 255, 0.3), rgba(255, 140, 240, 0.3));
+  -webkit-mask: radial-gradient(circle, #000, transparent 62%);
+  mask: radial-gradient(circle, #000, transparent 62%);
+  animation: spin 8s linear infinite;
+}
+
+.aura-o5 {
+  background: radial-gradient(circle, rgba(255, 200, 69, 0.3), transparent 62%);
+}
+
+@keyframes aura {
+  to {
+    transform: scale(1.12);
+    opacity: 0.7;
+  }
+}
+
+.pack-float {
+  animation: float 3.6s ease-in-out infinite;
+}
+
+.pack-float:hover {
+  animation-play-state: paused;
+}
+
+@keyframes float {
+  50% {
+    translate: 0 -10px;
+    rotate: 0.8deg;
+  }
+}
+
+.pack-hint {
+  margin-top: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: var(--text);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+.gacha-panels {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.mission-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.mission-list li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 22px 1fr auto;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: var(--r-md);
+  background: var(--bg-3);
+  border: 1px solid var(--line);
+  overflow: hidden;
+  font-size: 14px;
+}
+
+.mission-list li.done {
+  border-color: rgba(67, 211, 158, 0.4);
+  color: var(--text-dim);
+}
+
+.m-check {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1.5px solid var(--line-2);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.done .m-check {
+  background: var(--ok);
+  border-color: var(--ok);
+  color: #06281c;
+}
+
+.m-prog {
+  font-size: 13px;
+  color: var(--text-dim);
+}
+
+.m-bar {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: calc(var(--p) * 100%);
+  background: linear-gradient(90deg, var(--info), var(--ok));
+  transition: width 0.5s var(--ease-out);
+}
+
+.panel-foot {
+  margin: 12px 0 0;
+  font-size: 13px;
+}
+
+.stamp-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+}
+
+.stamp-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  aspect-ratio: 1 / 1.15;
+  border-radius: var(--r-md);
+  border: 1.5px dashed var(--line-2);
+  color: var(--text-faint);
+  font-size: 15px;
+}
+
+.stamp-slot svg {
+  width: 56%;
+  height: auto;
+  color: var(--accent);
+  --emblem-core: var(--text);
+  animation: badge-pop-s 0.4s var(--ease-spring);
+}
+
+.stamp-slot small {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+}
+
+.stamp-slot.filled {
+  border-style: solid;
+  border-color: rgba(255, 59, 78, 0.6);
+  background: rgba(255, 59, 78, 0.07);
+}
+
+.stamp-slot.o5 {
+  border-color: rgba(255, 200, 69, 0.55);
+  color: #ffd77a;
+}
+
+.stamp-slot.o5.filled svg {
+  color: #ffc845;
+}
+
+@keyframes badge-pop-s {
+  from {
+    transform: scale(0) rotate(-30deg);
+  }
+}
+
+.perks {
+  margin: 14px 0 8px;
+  padding-left: 18px;
+  font-size: 13px;
+  color: var(--text-dim);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.perks b {
+  color: var(--text);
+}
+
+.stats-line {
+  font-size: 12px;
+  color: var(--text-faint);
+}
+
+.legal {
+  max-width: 700px;
+  margin: 8px auto 0;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-faint);
+}
