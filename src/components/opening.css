@@ -364,10 +364,17 @@
   }
 }
 
+/*
+ * Giro de la carta. No depende de backface-visibility: WebKit (Safari) la aplica mal cuando la cara
+ * tiene capas 3D propias (la carta inclinable), y el frente aparecía tarde o espejado. En su lugar
+ * las caras se intercambian con `visibility` justo a mitad del giro, cuando la carta está de canto:
+ * la curva es simétrica, así que los 90° caen exactamente en la mitad de la duración.
+ */
 .flip {
+  --flip-dur: 0.6s;
   position: relative;
   transform-style: preserve-3d;
-  transition: transform 0.6s var(--ease-out);
+  transition: transform var(--flip-dur) cubic-bezier(0.65, 0, 0.35, 1);
 }
 
 .flip.flipped {
@@ -383,6 +390,17 @@
   position: absolute;
   inset: 0;
   transform: rotateY(180deg);
+  visibility: hidden;
+}
+
+.flip.flipped .flip-front {
+  visibility: visible;
+  transition: visibility 0s linear calc(var(--flip-dur) / 2);
+}
+
+.flip.flipped .flip-back {
+  visibility: hidden;
+  transition: visibility 0s linear calc(var(--flip-dur) / 2);
 }
 
 .stamp {
@@ -648,7 +666,8 @@
 
 .cell-tags {
   height: 22px;
-  animation: rise-in 0.3s var(--ease-out);
+  /* aparece cuando la carta ya mostró su cara (mitad del giro), no antes: no adelanta la sorpresa */
+  animation: rise-in 0.3s var(--ease-out) 0.3s both;
 }
 
 .new-pill {

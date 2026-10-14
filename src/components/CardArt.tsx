@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useId } from 'react';
 import type { Card, ObjClass } from '../data/types';
 import { RARITIES } from '../data/rarity';
 import { CLASSES } from '../data/classes';
@@ -100,7 +100,9 @@ export const CardArt = memo(function CardArt({ card, bare = false }: { card: Car
   const rng = mulberry32(hash32(card.id));
   const rar = RARITIES[card.rarity];
   const clsColor = CLASSES[card.cls].color;
-  const uid = `a${hash32(card.id).toString(36)}`;
+  // id único por instancia: la misma carta puede estar dos veces en pantalla (colección + detalle) y
+  // con ids repetidos Safari resuelve los degradados contra la primera copia (aunque esté oculta).
+  const uid = `a${useId().replace(/[^a-zA-Z0-9]/g, '')}`;
   const sides = 3 + Math.floor(rng() * 6);
   const rot = rng() * 360;
   const rings = 1 + Math.floor(rng() * 3);
